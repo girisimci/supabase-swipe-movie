@@ -1,13 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../auth";
 
 const Layout = ({ children }) => {
+    const auth = useAuth();
+
     return (
         <div>
             <header>
                 <ul>
                     <li><Link to={"/"}>Home</Link></li>
-                    <li><Link to={"sign-in"}>SignIn</Link></li>
+                    <li><Link to={"/profile"}>profile</Link></li>
+                    {auth.user ?
+                        <li>
+                            <button onClick={auth.logout}>logout</button>
+                        </li>
+                        :
+                        <li><Link to={"sign-in"}>SignIn</Link></li>
+                    }
                 </ul>
             </header>
             <main>
